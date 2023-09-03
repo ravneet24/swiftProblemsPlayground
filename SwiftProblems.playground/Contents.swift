@@ -319,4 +319,41 @@ print("New highestPaidEmployee ---- \(mpl.highestSalariedPerson)")
 
 print("New highestIdEmployee ---- \(mpl.highestId)")
 
-//checking initial commit 
+//checking initial commit
+
+// ------- Autoclosure --------------
+
+func checkClosure(closure:() -> (String)) {
+  let output = closure()
+    print("output in explicit closure ---> \(output)")
+}
+
+checkClosure(closure: {"Ravneet"})
+
+
+func checkAutoClosure(closure: @autoclosure () -> (String)) {
+  let output = closure()
+    print("output in autoclosure ---> \(output)")
+}
+checkAutoClosure(closure: "Ravneet")
+
+
+// ----- swift book example -------
+
+//without autoclosure
+var customerList = ["Ravneet", "Harsha", "Pankaj", "Dad", "Mom"]
+
+func serveCustomer(fetchFirstCustomerFromList: () -> (String)) {
+   print("Serving ---> \(fetchFirstCustomerFromList())")
+}
+
+serveCustomer {
+    customerList.removeFirst()
+}
+
+//with autoclosure
+func serveCustomerWithAutoclosure(fetchFirstCustomerFromList: @autoclosure () -> (String)) {
+   print("Serving ---> \(fetchFirstCustomerFromList())")
+}
+
+serveCustomerWithAutoclosure(fetchFirstCustomerFromList: customerList.removeFirst())
